@@ -1,0 +1,9 @@
+{
+  "name": "@agentos/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend API for AgentOS",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}

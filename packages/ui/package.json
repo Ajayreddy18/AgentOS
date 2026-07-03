@@ -1,0 +1,11 @@
+{
+  "name": "@agentos/ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable UI components ",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,41 @@
+{
+  "name": "agentOS",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Collaborative AI Operating System for Software Engineering",
+  "license": "MIT",
+  "packageManager": "npm@11.15.0",
+  "engines": {
+    "node": ">= 24.15.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "echo \"Workspace is not configured yet\"",
+    "build": "echo \"Workspace is not configured yet\"",
+    "lint": "eslint .",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "echo \"Workspace is not configured yet\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.7.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.9.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.1"
+  }
+}

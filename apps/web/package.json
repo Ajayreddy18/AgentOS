@@ -1,0 +1,9 @@
+{
+  "name": "@agentos/web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend application for agentOS",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
