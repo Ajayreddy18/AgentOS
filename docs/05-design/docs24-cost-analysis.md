@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -45,17 +45,17 @@ The initial version should be developed using free tiers and locally hosted serv
 
 # Development Environment
 
-| Component        | Solution                              | Cost |
-| ---------------- | ------------------------------------- | ---- |
-| Frontend         | React (Local Development)             | Free |
-| Backend          | Node.js + Express (Local Development) | Free |
-| Database         | PostgreSQL (Docker / Local)           | Free |
-| Vector Database  | PostgreSQL + pgvector                 | Free |
-| Cache            | Redis (Docker / Local)                | Free |
-| Object Storage   | Local Filesystem                      | Free |
-| Version Control  | Git + GitHub                          | Free |
-| Containerization | Docker                                | Free |
-| IDE              | VS Code                               | Free |
+| Component        | Solution                    | Cost |
+| ---------------- | --------------------------- | ---- |
+| Frontend         | React (Local Development)   | Free |
+| Backend          | Express (Local Development) | Free |
+| Database         | PostgreSQL (Docker / Local) | Free |
+| Vector Database  | PostgreSQL + pgvector       | Free |
+| Cache            | Redis (Docker / Local)      | Free |
+| Object Storage   | Local Filesystem            | Free |
+| Version Control  | Git + GitHub                | Free |
+| Containerization | Docker                      | Free |
+| IDE              | VS Code                     | Free |
 
 ---
 

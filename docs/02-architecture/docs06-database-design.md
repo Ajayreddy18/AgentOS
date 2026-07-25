@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -43,7 +59,7 @@ Database Engine
 
 ORM
 
-- Prisma
+- Drizzle ORM
 
 Vector Storage
 
@@ -51,7 +67,7 @@ Vector Storage
 
 Migration Tool
 
-- Prisma Migrate
+- Drizzle Kit
 
 ---
 
@@ -60,192 +76,51 @@ Migration Tool
 ```
 User
  │
- ├── Projects
- │      │
- │      ├── Tasks
- │      │      │
- │      │      └── Messages
- │      │
- │      ├── Files
- │      │
- │      ├── Memories
- │      │
- │      ├── Embeddings
- │      │
- │      └── Activity Logs
- │
- └── User Settings
+ └── Organizations
+        │
+        └── Projects
+               │
+               └── Environments
+                      │
+                      ├── Agents
+                      │      │
+                      │      ├── Conversations
+                      │      │      └── Messages
+                      │      │
+                      │      ├── Prompts
+                      │      ├── Tools
+                      │      ├── Models
+                      │      └── Runtime
+                      │
+                      ├── Knowledge Bases
+                      │      ├── Documents
+                      │      └── Embeddings
+                      │
+                      └── Activity Logs
 ```
 
 ---
 
 # Core Tables
 
-## Users
+Core Tables
 
-Purpose
-
-Stores registered users.
-
-Main Fields
-
-- id
-- name
-- email
-- password_hash
-- avatar
-- created_at
-- updated_at
-
----
-
-## Projects
-
-Purpose
-
-Stores software development projects.
-
-Main Fields
-
-- id
-- owner_id
-- name
-- description
-- status
-- tech_stack
-- created_at
-- updated_at
-
----
-
-## Tasks
-
-Purpose
-
-Stores development tasks.
-
-Main Fields
-
-- id
-- project_id
-- title
-- description
-- assigned_agent
-- priority
-- status
-- created_at
-
----
-
-## Conversations
-
-Purpose
-
-Stores AI conversations.
-
-Main Fields
-
-- id
-- project_id
-- title
-- created_at
-
----
-
-## Messages
-
-Purpose
-
-Stores chat history.
-
-Main Fields
-
-- id
-- conversation_id
-- sender
-- content
-- timestamp
-
----
-
-## Agents
-
-Purpose
-
-Stores available AI agents.
-
-Main Fields
-
-- id
-- name
-- role
-- description
-- system_prompt
-
----
-
-## Files
-
-Purpose
-
-Stores uploaded project files.
-
-Main Fields
-
-- id
-- project_id
-- filename
-- file_type
-- storage_path
-- uploaded_at
-
----
-
-## Memories
-
-Purpose
-
-Stores persistent project knowledge.
-
-Main Fields
-
-- id
-- project_id
-- memory_type
-- content
-- importance
-- created_at
-
----
-
-## Embeddings
-
-Purpose
-
-Stores vector representations for RAG.
-
-Main Fields
-
-- id
-- memory_id
-- vector
-- chunk_text
-
----
-
-## Activity Logs
-
-Purpose
-
-Stores important project events.
-
-Main Fields
-
-- id
-- project_id
-- action
-- actor
-- timestamp
+- Users
+- Organizations
+- Organization Members
+- Projects
+- Environments
+- Agents
+- Conversations
+- Messages
+- Knowledge Bases
+- Documents
+- Embeddings
+- Providers
+- Models
+- Prompts
+- Tools
+- Activity Logs
 
 ---
 
@@ -271,50 +146,61 @@ User
 
 ↓
 
-Many Projects
-
-Project
+Many Organizations
 
 ↓
 
-Many Tasks
+Many Projects
 
-Project
+↓
+
+Many Environments
+
+↓
+
+Many Agents
 
 ↓
 
 Many Conversations
 
-Conversation
-
 ↓
 
 Many Messages
 
-Project
+Environment
 
 ↓
 
-Many Files
-
-Project
+Knowledge Bases
 
 ↓
 
-Many Memories
-
-Memory
+Documents
 
 ↓
 
-Many Embeddings
+Embeddings
 
-Project
+Environment
 
 ↓
 
-Many Activity Logs
+Providers
 
+↓
+
+Models
+
+Environment
+
+↓
+
+Prompts
+
+↓
+
+Tools
 ---
 
 # Constraints
@@ -341,6 +227,11 @@ Indexes should be created for:
 - task status
 - timestamps
 - vector search columns
+- organization_id
+- environment_id
+- agent_id
+- provider_id
+- model_id
 
 ---
 
@@ -386,7 +277,11 @@ Activity logged
 
 Future versions may introduce:
 
-- Team workspaces
+- API Keys
+- Billing
+- Usage Analytics
+- Plugin Marketplace
+- Multi-region replication
 - Organizations
 - Permissions
 - Billing
@@ -403,3 +298,11 @@ The database architecture is designed around projects rather than conversations.
 Each project acts as an independent workspace containing tasks, files, AI conversations, memories, embeddings, and activity history.
 
 This structure provides a scalable foundation for AgentOS Version 1 while supporting future expansion.
+
+## References
+
+Related Documents
+
+- docs/architecture/05-system-architecture.md
+- docs/architecture/07-api-architecture.md
+- docs/architecture/08-backend-architecture.md

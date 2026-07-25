@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -24,7 +40,7 @@ All future technical decisions should align with the requirements defined in thi
 
 AgentOS is an AI-powered software engineering workspace where multiple specialized AI agents collaborate to help developers build software more efficiently.
 
-Unlike traditional AI assistants that operate independently, AgentOS coordinates multiple agents inside a shared project workspace with persistent memory, intelligent task orchestration, and project-wide context.
+Unlike traditional AI assistants that operate independently, AgentOS provides a configurable AI runtime with persistent project memory, Retrieval-Augmented Generation (RAG), streaming conversations, and a foundation for future multi-agent collaboration.
 
 Version 1 focuses exclusively on software engineering workflows.
 
@@ -93,7 +109,7 @@ Users interact with AgentOS through the following journeys:
 - Project creation
 - AI collaboration
 - File upload
-- Task completion
+- AI conversations
 - Returning to existing projects
 
 Each journey contributes to building and maintaining project context.
@@ -120,35 +136,37 @@ Version 1 must provide:
 - Edit project
 - Delete project
 - Project dashboard
+- Organization management
+- Environment management
 
 ---
 
 ### AI Collaboration
 
-- Planner Agent
-- Research Agent
-- Backend Agent
-- Frontend Agent
-- Reviewer Agent
-- Documentation Agent
+- Configurable AI Runtime
+- Conversation Management
+- Streaming AI Responses
+- Tool Calling
+- Runtime Configuration
+- Foundation for Multi-Agent Collaboration
 
 ---
 
-### Task Management
+### Conversation Management
 
-- Create task
-- Assign task
-- View progress
-- Task history
+- Create conversation
+- View conversation history
+- Stream AI responses
+- Maintain conversation context
 
 ---
 
 ### File Management
 
-- Upload files
-- Delete files
-- View files
-- Search files
+- Upload documents
+- Manage knowledge base
+- Generate embeddings
+- Retrieve project context
 
 ---
 
@@ -156,12 +174,12 @@ Version 1 must provide:
 
 - Project memory
 - Conversation history
-- Task history
+- Runtime memory
 - Knowledge retrieval
 
 ---
 
-### RAG
+### Retrieval Augmented Generation (RAG)
 
 - Document indexing
 - Embedding generation
@@ -219,14 +237,18 @@ The system should be:
 Version 1 includes:
 
 - Authentication
-- Dashboard
-- Project Workspace
-- Multi-Agent Chat
-- Project Memory
-- File Upload
-- RAG
-- Documentation
-- Task Tracking
+- Organizations
+- Projects
+- Environments
+- Agents
+- Conversations
+- Knowledge Base
+- Documents
+- Prompts
+- Runtime Configuration
+- Streaming Chat
+- Tool Registry
+- Retrieval-Augmented Generation (RAG)
 
 ---
 
@@ -237,10 +259,14 @@ The Minimum Viable Product will support:
 - One user
 - Multiple projects
 - Persistent memory
-- AI collaboration
-- Documentation
-- Code review
-- Project planning
+- Organizations
+- Projects
+- Environments
+- Agents
+- Conversations
+- Persistent memory
+- Knowledge retrieval
+- Streaming AI chat
 
 ---
 
@@ -264,10 +290,10 @@ Version 1 excludes:
 The product will be considered successful if:
 
 - Users create projects successfully.
-- AI agents collaborate correctly.
+- AI runtime retrieves project context correctly.
 - Project memory persists.
 - Context retrieval improves AI responses.
-- Documentation is generated automatically.
+- Streaming AI responses are generated successfully.
 - Users spend less time switching tools.
 
 ---
@@ -326,10 +352,10 @@ Future versions may include:
 Version 1 is complete when:
 
 - Users can create projects.
-- AI agents collaborate successfully.
+- AI runtime generates context-aware responses.
 - Memory persists across sessions.
 - Files improve AI responses.
-- Documentation is generated automatically.
+- AI runtime generates context-aware responses.
 - Core user journeys are fully supported.
 
 ---
@@ -341,3 +367,4 @@ Related Documents
 - 01-product-definition.md
 - 02-user-personas.md
 - 03-user-journeys.md
+- README.md

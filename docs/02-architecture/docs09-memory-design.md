@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -44,7 +60,7 @@ The memory system follows these principles:
 - Searchable
 - Explainable
 - Incrementally updated
-- Independent of any single AI model
+- - Provider independent (OpenAI, Anthropic, Groq, Ollama, etc.)
 
 ---
 
@@ -54,17 +70,15 @@ AgentOS maintains four layers of memory.
 
 ```
 User Memory
-
-↓
-
+      │
 Project Memory
-
-↓
-
+      │
+Conversation Memory
+      │
 Session Memory
-
-↓
-
+      │
+Knowledge Base (RAG)
+      │
 Retrieved Context
 ```
 
@@ -93,6 +107,24 @@ Long-term
 ---
 
 # Project Memory
+
+# Conversation Memory
+
+## Purpose
+
+Stores all conversations that occur inside a project.
+
+## Examples
+
+- User prompts
+- Assistant responses
+- Tool execution results
+- AI reasoning summaries
+- Conversation metadata
+
+## Lifetime
+
+Until the conversation is deleted.
 
 ## Purpose
 
@@ -146,10 +178,11 @@ Instead of loading the entire project memory, AgentOS retrieves only the most re
 ## Sources
 
 - Project memory
-- Files
-- Documentation
-- Previous conversations
-- RAG search results
+- Conversation memory
+- Knowledge Base
+- Uploaded documents
+- Retrieved embeddings
+- Runtime memories
 
 ---
 
@@ -171,6 +204,12 @@ Examples include:
 - Research
 - File Summary
 - User Preference
+- Runtime
+- Agent Output
+- Tool Result
+- Knowledge Base
+- Conversation Summary
+- Code Generation
 
 Categorization improves search accuracy and future maintenance.
 
@@ -200,17 +239,25 @@ Relevant summaries are stored in Project Memory.
 
 ↓
 
-Embeddings are generated.
+Embeddings generated
 
 ↓
 
-Memory becomes searchable.
+Stored in Knowledge Base
+
+↓
+
+Indexed by Vector Store
+
+↓
+
+Available through Retrieval Engine
 
 ---
 
 # Memory Update Strategy
 
-The Agent Orchestrator is responsible for updating persistent memory.
+The Runtime coordinates memory updates while the Memory Service stores structured memories and the Knowledge Base indexes searchable content.
 
 The update process includes:
 
@@ -237,11 +284,35 @@ Relevant memory categories are identified.
 
 ↓
 
-Semantic search retrieves matching entries.
+Retrieval Engine searches
 
 ↓
 
-Relevant files are searched.
+Knowledge Base
+
+↓
+
+Project Memories
+
+↓
+
+Conversation History
+
+↓
+
+Relevant Documents
+
+↓
+
+Embeddings
+
+↓
+
+Context Ranking
+
+↓
+
+Context Assembly
 
 ↓
 
@@ -292,6 +363,9 @@ Memory should:
 - Never expose one user's project to another.
 - Respect authentication and authorization rules.
 - Avoid storing sensitive secrets in plain text.
+- Organization isolation
+- Environment isolation
+- Row-level authorization
 
 ---
 
@@ -319,6 +393,11 @@ Future versions may include:
 - User-managed memory editing
 - AI-generated project timelines
 - Knowledge graphs
+- Automatic conversation summarization
+- Hybrid search (keyword + vector)
+- Memory compression
+- Memory versioning
+- Agent-specific memories
 
 ---
 
@@ -341,3 +420,16 @@ The memory system should always be:
 The persistent memory system is a foundational capability of AgentOS.
 
 By preserving structured project knowledge beyond individual conversations, the platform enables AI agents to collaborate with long-term awareness, reducing repetitive prompts and improving the overall software engineering experience.
+
+# Current Version 1 Implementation
+
+Version 1 includes:
+
+- User Memory
+- Project Memory
+- Conversation Memory
+- Knowledge Base
+- Document Storage
+- Embedding Storage
+- Semantic Retrieval
+- Runtime Context Assembly

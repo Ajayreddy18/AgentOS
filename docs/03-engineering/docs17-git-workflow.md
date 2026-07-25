@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -33,6 +33,93 @@ The workflow should:
 
 ---
 
+# Git Workflow Principles
+
+The Git workflow should prioritize:
+
+- Small, focused changes
+- Frequent commits
+- Reproducible history
+- Easy code reviews
+- Safe deployments
+- Fast rollback
+- Automated validation
+
+---
+
+# Repository Principles
+
+The repository should always remain:
+
+- Buildable from the default branch.
+- Easy to navigate.
+- Easy to review.
+- Easy to rollback.
+- Consistent across all packages.
+- Protected against accidental breaking changes.
+
+Every commit should improve the overall quality of the codebase.
+
+---
+
+# Monorepo Workflow
+
+Changes affecting shared packages should:
+
+- Update dependent applications.
+- Run tests across affected packages.
+- Verify package compatibility.
+
+---
+
+# Documentation Workflow
+
+Documentation should be updated whenever:
+
+- APIs change
+- Database schema changes
+- Architecture changes
+- User workflows change
+
+Documentation changes should be included in the same Pull Request whenever possible.
+
+---
+
+# Issue Workflow
+
+Issues should include:
+
+- Description
+- Expected behavior
+- Current behavior
+- Steps to reproduce
+- Screenshots (if applicable)
+
+---
+
+# Security Fixes
+
+Security vulnerabilities should:
+
+- Be fixed through hotfix branches.
+- Receive priority review.
+- Avoid public disclosure before release.
+
+---
+
+# AI Feature Workflow
+
+AI-related Pull Requests should verify:
+
+- Prompt changes
+- Tool execution
+- Memory updates
+- Retrieval quality
+- Streaming responses
+- Token usage
+
+---
+
 # Branching Strategy
 
 Version 1 uses a simplified Git Flow.
@@ -49,11 +136,34 @@ main
 ├── hotfix/*
 │
 └── release/*
+
+Feature branches should always be created from develop.
+
+Release branches should be created from develop after feature completion.
+
+Hotfix branches should always be created from main.
 ```
 
 ---
 
 # Branch Purpose
+
+develop
+│
+▼
+feature/*
+│
+▼
+develop
+│
+▼
+release/*
+│
+▼
+main
+│
+▼
+tag
 
 ## main
 
@@ -169,35 +279,41 @@ Use the Conventional Commits specification.
 Examples
 
 ```
-feat: add project creation API
+feat      New functionality
 
-feat: implement planner agent
+fix       Bug fix
 
-fix: resolve JWT validation issue
+docs      Documentation only
 
-docs: update API documentation
+refactor  Internal improvements
 
-refactor: simplify memory retrieval
+test      Testing
 
-test: add authentication unit tests
+style     Formatting only
 
-style: format backend modules
+perf      Performance improvements
 
-chore: update dependencies
+build     Build system
+
+ci        CI/CD changes
+
+chore     Maintenance
 ```
 
 ---
 
 # Commit Guidelines
 
-Commits should:
+Each commit should:
 
-- Represent a single logical change.
-- Build successfully.
+- Represent one logical change.
+- Compile successfully.
+- Pass tests where applicable.
 - Pass linting.
 - Avoid unrelated modifications.
+- Be easy to revert independently.
 
-Avoid large "everything" commits.
+Prefer several small commits over one large commit.
 
 ---
 
@@ -205,11 +321,35 @@ Avoid large "everything" commits.
 
 Every Pull Request should include:
 
-- Clear title
-- Summary of changes
+- Summary
+- Motivation
 - Testing performed
-- Related issue (if applicable)
-- Updated documentation (if required)
+- Screenshots (UI changes)
+- Related issue
+- Documentation updates
+- Breaking changes (if any)
+
+---
+
+Reviewers should verify:
+
+- Functional correctness
+- Architecture consistency
+- Security
+- Performance
+- Test coverage
+- Error handling
+- Naming conventions
+- Documentation
+- Simplicity
+
+---
+
+# Pull Request Size
+
+Prefer pull requests containing fewer than 500 changed lines.
+
+Large pull requests are harder to review and increase the likelihood of defects.
 
 ---
 
@@ -231,13 +371,15 @@ Before merging:
 
 Reviewers should verify:
 
-- Correctness
-- Readability
-- Simplicity
+- Functional correctness
+- Architecture consistency
 - Security
 - Performance
 - Test coverage
+- Error handling
+- Naming conventions
 - Documentation
+- Simplicity
 
 Feedback should focus on improving the code rather than criticizing the developer.
 
@@ -248,7 +390,11 @@ Feedback should focus on improving the code rather than criticizing the develope
 Use:
 
 ```
-Squash and Merge
+Use Squash and Merge for feature branches.
+
+Use Merge Commit only when preserving branch history is necessary.
+
+Avoid rebasing shared branches after they have been pushed.
 ```
 
 Benefits
@@ -261,12 +407,33 @@ Avoid unnecessary merge commits.
 
 ---
 
+# Merge Conflict Resolution
+
+Before opening a Pull Request:
+
+- Update your branch from develop.
+- Resolve conflicts locally.
+- Re-run tests.
+- Verify the application still builds.
+
+---
+
 # Versioning Strategy
 
 Use Semantic Versioning.
 
 ```
-MAJOR.MINOR.PATCH
+MAJOR
+
+Breaking API changes
+
+MINOR
+
+Backward-compatible features
+
+PATCH
+
+Backward-compatible bug fixes
 ```
 
 Examples
@@ -323,6 +490,19 @@ Merge back into develop
 
 ---
 
+# Release Checklist
+
+Before creating a release:
+
+- All tests passing
+- Documentation updated
+- Version number updated
+- Release notes written
+- Database migrations verified
+- Security review completed
+
+---
+
 # Git Tags
 
 Every production release should be tagged.
@@ -355,7 +535,41 @@ Recommended protections:
 - Require pull requests.
 - Require review before merge.
 
+Require:
+
+- Signed commits (future)
+- Status checks
+- Linear history
+- Conversation resolution
+- Branch deletion after merge
+
 ---
+
+# Branch Cleanup
+
+Feature branches should be deleted immediately after merging.
+
+Release branches should be archived after deployment.
+
+Hotfix branches should be deleted after synchronization.
+
+---
+
+# Add Hotflix Workflow
+
+main
+
+↓
+
+hotfix/*
+
+↓
+
+main
+
+↓
+
+develop
 
 # Large Files
 
@@ -369,6 +583,32 @@ Do not commit:
 - Generated logs
 
 Use `.gitignore` appropriately.
+
+node_modules/
+
+dist/
+
+coverage/
+
+.env
+
+uploads/
+
+.vector-cache/
+
+embeddings/
+
+logs/
+
+tmp/
+
+*.sqlite
+
+*.db
+
+.vscode/
+
+.idea/
 
 ---
 
@@ -418,14 +658,28 @@ Rollbacks should be quick and well documented.
 
 ---
 
+# Reverting Changes
+
+If a feature introduces regressions:
+
+- Revert the merge commit.
+- Open a new feature branch.
+- Apply the fix.
+- Submit a new Pull Request.
+
+Avoid rewriting published history.
+
+---
+
 # Dependency Updates
 
-Dependency upgrades should:
+Before upgrading dependencies:
 
-- Be reviewed.
-- Pass automated testing.
-- Include release notes if significant.
-- Avoid unnecessary version changes.
+- Review release notes.
+- Check for security advisories.
+- Test locally.
+- Verify CI.
+- Update lock files.
 
 ---
 
@@ -452,6 +706,19 @@ The repository should include:
 - Pull Request Template
 - Issue Templates
 - GitHub Actions workflows
+
+---
+
+# GitHub Actions
+
+Every push should trigger:
+
+- Install dependencies
+- Type check
+- Lint
+- Unit tests
+- Build
+- Artifact generation (future)
 
 ---
 

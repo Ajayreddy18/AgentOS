@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -137,106 +137,49 @@ Update preferences such as theme, AI model selection, and notification settings.
 
 ---
 
-# Project APIs
+# Organization APIs
 
-## Create Project
+GET /organizations
 
-POST
+POST /organizations
 
-```
-/projects
-```
+GET /organizations/{organizationId}
 
----
+PUT /organizations/{organizationId}
 
-## Get All Projects
-
-GET
-
-```
-/projects
-```
+DELETE /organizations/{organizationId}
 
 ---
 
-## Get Project
+Project APIs
 
-GET
+GET /organizations/{organizationId}/projects
 
-```
-/projects/{projectId}
-```
+POST /organizations/{organizationId}/projects
 
----
+GET /projects/{projectId}
 
-## Update Project
+PUT /projects/{projectId}
 
-PUT
-
-```
-/projects/{projectId}
-```
+DELETE /projects/{projectId}
 
 ---
 
-## Delete Project
+Environment APIs
 
-DELETE
+GET /projects/{projectId}/environments
 
-```
-/projects/{projectId}
+POST /projects/{projectId}/environments
+
+GET /environments/{environmentId}
+
+PUT /environments/{environmentId}
+
+DELETE /environments/{environmentId}
+
 ```
 
 ---
-
-# Task APIs
-
-## Create Task
-
-POST
-
-```
-/projects/{projectId}/tasks
-```
-
----
-
-## Get Tasks
-
-GET
-
-```
-/projects/{projectId}/tasks
-```
-
----
-
-## Get Task
-
-GET
-
-```
-/tasks/{taskId}
-```
-
----
-
-## Update Task
-
-PUT
-
-```
-/tasks/{taskId}
-```
-
----
-
-## Delete Task
-
-DELETE
-
-```
-/tasks/{taskId}
 ```
 
 ---
@@ -248,7 +191,7 @@ DELETE
 POST
 
 ```
-/projects/{projectId}/conversations
+/agents/{agentId}/conversations
 ```
 
 ---
@@ -258,7 +201,7 @@ POST
 GET
 
 ```
-/projects/{projectId}/conversations
+/agents/{agentId}/conversations
 ```
 
 ---
@@ -268,7 +211,7 @@ GET
 GET
 
 ```
-/conversations/{conversationId}
+/agents/{conversationId}
 ```
 
 ---
@@ -280,7 +223,8 @@ GET
 POST
 
 ```
-/conversations/{conversationId}/messages
+/conversations/{conversationId}/chat
+POST /conversations/{conversationId}/chat/stream
 ```
 
 Purpose
@@ -305,109 +249,58 @@ Retrieve conversation history.
 
 # Agent APIs
 
-## Get Available Agents
+GET /environments/{environmentId}/agents
 
-GET
+POST /environments/{environmentId}/agents
 
-```
-/agents
-```
+GET /agents/{agentId}
 
----
+PUT /agents/{agentId}
 
-## Get Agent Details
-
-GET
-
-```
-/agents/{agentId}
-```
-
----
-
-## Execute Agent Task
-
-POST
-
-```
-/agents/{agentId}/execute
-```
-
-Purpose
-
-Run a specific AI agent for a defined task.
+DELETE /agents/{agentId}
 
 ---
 
 # File APIs
 
-## Upload File
+Knowledge Base APIs
 
-POST
+GET /agents/{agentId}/knowledge
 
-```
-/projects/{projectId}/files
-```
+POST /agents/{agentId}/knowledge
 
----
+GET /knowledge/{knowledgeId}
 
-## Get Files
+PUT /knowledge/{knowledgeId}
 
-GET
-
-```
-/projects/{projectId}/files
-```
+DELETE /knowledge/{knowledgeId}
 
 ---
 
-## Download File
+Document APIs
 
-GET
+GET /knowledge/{knowledgeId}/documents
 
-```
-/files/{fileId}
-```
+POST /knowledge/{knowledgeId}/documents
 
----
+GET /documents/{documentId}
 
-## Delete File
-
-DELETE
-
-```
-/files/{fileId}
-```
-
----
-
-# Memory APIs
-
-## Get Project Memory
-
-GET
-
-```
-/projects/{projectId}/memory
-```
-
----
-
-## Search Memory
-
-GET
-
-```
-/projects/{projectId}/memory/search
-```
-
-Purpose
-
-Retrieve relevant memories based on a search query.
-
+DELETE /documents/{documentId}
 ---
 
 # RAG APIs
+
+Embedding APIs
+
+POST /documents/{documentId}/embed
+
+GET /documents/{documentId}/embeddings
+
+---
+
+Retrieval APIs
+
+POST /retrieval/search
 
 ## Index Documents
 
@@ -422,6 +315,54 @@ Purpose
 Generate embeddings for project files.
 
 ---
+
+###Provider APIs
+
+GET /providers
+
+POST /providers
+
+GET /providers/{providerId}
+
+PUT /providers/{providerId}
+
+DELETE /providers/{providerId}
+
+Model APIs
+
+GET /providers/{providerId}/models
+
+POST /providers/{providerId}/models
+
+GET /models/{modelId}
+
+PUT /models/{modelId}
+
+DELETE /models/{modelId}
+
+Prompt APIs
+
+GET /agents/{agentId}/prompts
+
+POST /agents/{agentId}/prompts
+
+GET /prompts/{promptId}
+
+PUT /prompts/{promptId}
+
+DELETE /prompts/{promptId}
+
+Tool APIs
+
+GET /agents/{agentId}/tools
+
+POST /agents/{agentId}/tools
+
+GET /tools/{toolId}
+
+PUT /tools/{toolId}
+
+DELETE /tools/{toolId}
 
 ## Search Knowledge Base
 
@@ -524,7 +465,9 @@ without breaking existing clients.
 Future releases may include:
 
 - Team APIs
-- Organization APIs
+- - Webhooks
+- API Keys
+- Usage Analytics
 - Billing APIs
 - Plugin APIs
 - Marketplace APIs

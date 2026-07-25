@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -28,7 +44,7 @@ Every feature included in AgentOS Version 1 should solve one or more problems ex
 
 ## Overview
 
-The Solo AI Engineer is an individual developer who builds AI-powered applications independently.
+The Solo AI Engineer is an individual developer who builds AI-powered software applications independently using modern development tools and AI assistants.
 
 They are responsible for planning, designing, coding, debugging, testing, documenting, and deploying software without the support of a large engineering team.
 
@@ -114,8 +130,10 @@ Deployment
 - Cursor
 - GitHub
 - VS Code
-- Postman
+- bruno
 - Notion
+- Claude
+- Gemini
 
 ---
 
@@ -235,6 +253,7 @@ Launch
 - GitHub
 - Figma
 - Slack
+- Claude
 
 ---
 
@@ -317,6 +336,7 @@ Uses AI tools to improve productivity and reduce repetitive work.
 - Cursor
 - Trello
 - VS Code
+- Postman
 
 ---
 
@@ -384,7 +404,7 @@ AgentOS Version 1 will prioritize:
 
 - Code Review
 
-- RAG
+- Retrieval Augmented Generation (RAG)
 
 - Project Knowledge
 
@@ -407,7 +427,7 @@ The personas reveal several common challenges across all target users:
 - Context switching between AI tools
 - Loss of project knowledge
 - Repetitive manual work
-- Lack of persistent AI memory
+- Lack of persistent project memory
 - Difficulty coordinating software development tasks
 
 These shared challenges directly influence the architecture and feature set of AgentOS Version 1.

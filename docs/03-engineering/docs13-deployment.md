@@ -2,13 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
 
 ---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 # Document Purpose
 
@@ -90,14 +104,15 @@ Characteristics
 
 The deployed system consists of:
 
-- React Frontend
-- Backend API
-- PostgreSQL Database
-- pgvector Extension
-- File Storage
-- AI Provider Integration
-- Logging Service
-- Monitoring Service
+- React Frontend (apps/web)
+- Express Backend API (apps/api)
+- PostgreSQL
+- pgvector
+- Local File Storage
+- AI Provider Layer
+- Runtime Engine
+- Logging
+- Monitoring
 
 Each component should be independently maintainable.
 
@@ -109,9 +124,9 @@ Version 1 should support Docker.
 
 Containers include:
 
-- Frontend
-- Backend
-- PostgreSQL
+- Frontend (React)
+- Backend (Express API)
+- PostgreSQL + pgvector
 
 Benefits
 
@@ -190,15 +205,28 @@ All uploaded files should be associated with a project and protected by authoriz
 
 AI providers should be configurable.
 
-Examples
+Version 1 Providers
 
+- Groq
 - OpenAI
-- Anthropic
-- Local models
+- OpenRouter
+- Ollama (Local Models)
 
-Changing providers should require minimal application changes.
+The provider layer allows switching providers without changing business logic.
 
 ---
+
+## Runtime Configuration
+
+Each project runtime defines:
+
+- Selected Provider
+- Selected Model
+- Prompt Configuration
+- Enabled Tools
+- Retrieval Settings
+
+The Runtime Loader initializes these settings before every AI request.
 
 # CI/CD Pipeline
 
@@ -218,6 +246,14 @@ Run Unit Tests
 ↓
 
 Run Integration Tests
+
+↓
+
+Run TypeScript Build
+
+↓
+
+Database Migration Check
 
 ↓
 
@@ -256,6 +292,10 @@ The system should monitor:
 - CPU usage
 - Disk usage
 - Error rates
+- Token usage
+- AI provider failures
+- Tool execution metrics
+- Streaming connection health
 
 Monitoring should support proactive issue detection.
 
@@ -271,6 +311,10 @@ Log important events such as:
 - File uploads
 - Deployment events
 - System errors
+- Runtime loading
+- Tool execution
+- Retrieval operations
+- Provider requests
 
 Logs should exclude sensitive information.
 
@@ -318,7 +362,9 @@ Future versions
 - Multiple backend instances
 - Load balancer
 - Distributed workers
-- Separate AI services
+- Dedicated Runtime Workers
+- Background Embedding Workers
+- Document Processing Workers
 - Distributed file storage
 - Horizontal database scaling
 
@@ -400,3 +446,61 @@ The deployment architecture should remain:
 The deployment strategy provides a reliable path from local development to production.
 
 By using containerization, environment-based configuration, automated deployment practices, monitoring, backups, and scalable infrastructure patterns, AgentOS Version 1 establishes a strong operational foundation while maintaining the project's goal of near-zero development cost.
+
+Deployment Architecture
+
+User
+
+↓
+
+React Frontend
+
+↓
+
+Express API
+
+↓
+
+Runtime Engine
+
+↓
+
+Provider Layer
+
+↓
+
+LLM Provider
+
+↓
+
+PostgreSQL + pgvector
+
+↓
+
+Local File Storage
+
+Production Stack
+
+Frontend
+
+- React
+- Vite
+- Nginx
+
+Backend
+
+- Express
+
+Database
+
+- PostgreSQL
+- pgvector
+
+Storage
+
+- Local Storage (Version 1)
+
+Container
+
+- Docker
+- Docker Compose

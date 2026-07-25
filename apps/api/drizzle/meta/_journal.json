@@ -1,0 +1,132 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1783089393539,
+      "tag": "0000_fresh_random",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1783211091944,
+      "tag": "0001_stormy_blue_shield",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783231850201,
+      "tag": "0002_black_komodo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783256588388,
+      "tag": "0003_gorgeous_vermin",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783308485498,
+      "tag": "0004_fat_magdalene",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1783317419812,
+      "tag": "0005_redundant_silk_fever",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1783328449671,
+      "tag": "0006_overrated_skullbuster",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1783333754491,
+      "tag": "0007_lame_thundra",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1783337368050,
+      "tag": "0008_wealthy_devos",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1783343122163,
+      "tag": "0009_lovely_revanche",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1783344726616,
+      "tag": "0010_marvelous_mother_askani",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1783349810443,
+      "tag": "0011_vengeful_golden_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1783510495196,
+      "tag": "0012_groovy_darkhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1783524219985,
+      "tag": "0013_broad_lucky_pierre",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1783916385498,
+      "tag": "0014_new_peter_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1784649867035,
+      "tag": "0015_complex_raider",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1784955920464,
+      "tag": "0016_chubby_mauler",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1784956565458,
+      "tag": "0017_wakeful_archangel",
+      "breakpoints": true
+    }
+  ]
+}

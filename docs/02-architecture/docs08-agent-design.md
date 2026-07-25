@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -40,29 +56,32 @@ The Agent Orchestrator is responsible for coordinating all agents.
 
 ## Purpose
 
-The Agent Orchestrator acts as the central coordinator for every AI task.
+The Runtime Engine acts as the central coordinator for every AI request.
 
-Users never interact directly with individual agents.
+It loads the runtime configuration, retrieves project context, selects the appropriate provider and model, executes tools when required, retrieves knowledge from the Knowledge Base, and generates the final response.
 
-Instead, requests are sent to the orchestrator, which determines:
+The Runtime Engine is composed of:
 
-- Which agents are required
-- Execution order
-- Information sharing
-- Result aggregation
-- Error recovery
+- Runtime Loader
+- Planner
+- Retrieval Service
+- Tool Runtime
+- Provider Service
+- Memory Manager
 
 ---
 
 ## Responsibilities
 
-- Receive user requests
-- Analyze intent
-- Select participating agents
-- Manage execution flow
-- Merge outputs
-- Update project memory
-- Return final response
+- Load runtime configuration
+- Retrieve project knowledge
+- Load conversation history
+- Build system prompt
+- Execute planning
+- Execute tools
+- Call the configured LLM provider
+- Stream responses
+- Store conversation history
 
 ---
 
@@ -73,6 +92,9 @@ Instead, requests are sent to the orchestrator, which determines:
 - Project memory
 - Uploaded files
 - Previous conversations
+- Runtime configuration
+- Provider configuration
+- Selected model
 
 ---
 
@@ -81,6 +103,8 @@ Instead, requests are sent to the orchestrator, which determines:
 - Final response
 - Updated memory
 - Agent execution log
+- Tool execution results
+- Streaming response events
 
 ---
 
@@ -120,9 +144,12 @@ Break large software tasks into structured implementation plans.
 
 ## Available Tools
 
-- Project memory
-- Task history
-- Knowledge retrieval
+Available Tools
+
+- Runtime Tool Registry
+- Knowledge Retrieval
+- Conversation History
+- Runtime Configuration
 
 ---
 
@@ -167,8 +194,6 @@ Collect technical information relevant to the user's task.
 
 ---
 
-# Backend Agent
-
 ## Purpose
 
 Design and generate backend implementation.
@@ -208,7 +233,13 @@ Design and generate backend implementation.
 
 ---
 
-# Frontend Agent
+## Future versions may introduce:
+
+- Autonomous Agent Workflows
+- Multi-Agent Collaboration Engine
+- Parallel Agent Execution
+- Human Approval Workflows
+- Custom Agent Marketplace
 
 ## Purpose
 
@@ -339,7 +370,7 @@ User
 
 ↓
 
-Agent Orchestrator
+Runtime Engine
 
 ↓
 
@@ -347,23 +378,23 @@ Planner
 
 ↓
 
-Research
+Retrieval Service
 
 ↓
 
-Backend
+Tool Runtime
 
 ↓
 
-Frontend
+LLM Provider
 
 ↓
 
-Reviewer
+Streaming Response
 
 ↓
 
-Documentation
+Conversation Memory
 
 ↓
 
@@ -380,13 +411,12 @@ This simplifies coordination and improves reliability.
 
 Every agent has access to:
 
-- Project overview
-- Architecture
-- Documentation
-- Previous conversations
-- Tasks
-- Files
-- Retrieved knowledge
+- Conversation History
+- Knowledge Base
+- Retrieved Documents
+- Runtime Configuration
+- Agent Prompt
+- Tool Results
 
 Agents may read shared memory.
 
@@ -404,27 +434,31 @@ User:
 
 ↓
 
-Planner Agent
+Runtime Loaded
 
 ↓
 
-Research Agent
+Planner
 
 ↓
 
-Backend Agent
+Knowledge Retrieval
 
 ↓
 
-Frontend Agent
+Tool Execution (Optional)
 
 ↓
 
-Reviewer Agent
+LLM Provider
 
 ↓
 
-Documentation Agent
+Streaming Response
+
+↓
+
+Conversation Stored
 
 ↓
 

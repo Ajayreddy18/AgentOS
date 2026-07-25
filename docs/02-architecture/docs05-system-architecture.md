@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -38,32 +54,29 @@ The architecture is designed to achieve the following objectives:
 # High-Level Architecture
 
 ```
-                    User
-                     │
-                     ▼
-             React Frontend
-                     │
-                     ▼
-              Backend API
-                     │
- ┌──────────┬─────────┼───────────┬────────────┐
- ▼          ▼         ▼           ▼
-Auth     Project   Agent      File Service
-Service   Service  Orchestrator
-                       │
-         ┌─────────────┼─────────────┐
-         ▼             ▼             ▼
-    Planner      Backend AI     Frontend AI
-      Agent         Agent           Agent
-         ▼             ▼             ▼
-         └────── Reviewer Agent ─────┘
-                     │
-                     ▼
-              Memory Service
-                     │
-      ┌──────────────┴──────────────┐
-      ▼                             ▼
- PostgreSQL                  Vector Store
+                                        User
+                      │
+                      ▼
+              React Frontend
+                      │
+                      ▼
+                 Express API
+                      │
+      ┌───────────────┼────────────────┐
+      ▼               ▼                ▼
+ Authentication   Project Runtime   Knowledge Base
+                      │
+        ┌─────────────┼─────────────┐
+        ▼             ▼             ▼
+   Planner       Tool Runtime    Retrieval
+        │             │             │
+        └─────────────┼─────────────┘
+                      ▼
+               LLM Provider Layer
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+     PostgreSQL             pgvector
 ```
 
 ---
@@ -380,11 +393,13 @@ Frontend
 
 - React
 - TypeScript
+- Vite
+- Tailwind CSS
 
 Backend
 
-- Node.js
-- NestJS (preferred) or Express
+- Express
+- TypeScript
 
 Database
 
@@ -392,7 +407,7 @@ Database
 
 ORM
 
-- Prisma
+- Drizzle ORM
 
 Vector Store
 
@@ -400,11 +415,12 @@ Vector Store
 
 AI
 
-- LLM APIs / Local models
+- Groq API (Default Provider)
+- Provider Architecture (Extensible)
 
 File Storage
 
-- Local (Version 1)
+- Local Storage (Version 1)
 
 ---
 
@@ -450,3 +466,12 @@ Future versions may include:
 The architecture defined in this document provides the technical foundation for AgentOS Version 1.
 
 All backend services, frontend modules, AI agents, databases, APIs, and infrastructure should follow the architecture described here.
+
+## References
+
+Related Documents
+
+- docs/product/01-product-definition.md
+- docs/product/04-product-requirements-document.md
+- docs/architecture/06-database-design.md
+- docs/architecture/07-api-architecture.md

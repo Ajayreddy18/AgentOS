@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -40,17 +40,15 @@ The repository should:
 agentos/
 
 ├── apps/
-│   ├── frontend/
-│   └── backend/
+│   ├── api/
+│   └── web/
 │
 ├── packages/
 │   ├── ui/
 │   ├── shared/
 │   ├── types/
-│   ├── prompts/
-│   └── config/
-|   └── agents/
-|   └── schemas/
+│   │── config/
+|
 │
 ├── docs/
 │
@@ -58,7 +56,7 @@ agentos/
 │
 ├── scripts/
 │
-├── prisma/
+├── drizzle/
 │
 ├── .github/
 │   └── workflows/
@@ -67,7 +65,7 @@ agentos/
 │
 ├── .env.example
 ├── package.json
-├── pnpm-workspace.yaml
+├── package-lock.json
 ├── tsconfig.base.json
 ├── README.md
 └── LICENSE
@@ -96,7 +94,7 @@ Contains runnable applications.
 
 ---
 
-## apps/frontend
+## apps/web
 
 Purpose
 
@@ -114,11 +112,11 @@ Responsibilities
 
 ---
 
-## apps/backend
+## apps/api
 
 Purpose
 
-NestJS backend.
+Express.js backend.
 
 Responsibilities
 
@@ -130,6 +128,12 @@ Responsibilities
 - File processing
 - Database access
 - Business logic
+- Runtime Engine
+- Provider Layer
+- Tool Runtime
+- Tool Registry
+- Tool Execution
+- Streaming Responses (SSE)
 
 ---
 
@@ -181,21 +185,6 @@ Examples:
 
 ---
 
-## packages/prompts
-
-Stores prompt templates.
-
-Examples:
-
-- Planner prompts
-- Reviewer prompts
-- Documentation prompts
-- Memory prompts
-
-Prompt definitions should remain version-controlled.
-
----
-
 ## packages/config
 
 Shared configuration.
@@ -206,22 +195,37 @@ Examples:
 - Feature flags
 - Application constants
 - Default settings
+- Runtime configuration
+- AI provider configuration
+- Model configuration
 
 ---
 
-# prisma/
+# Drizzle/
 
 Contains:
 
-- Prisma schema
-- Database migrations
-- Seed scripts
+- Drizzle schema
+- Drizzle migrations
+- Database configuration
 
 This directory is the single source of truth for the database schema.
 
 ---
 
 # docs/
+
+# product/
+
+# architecture/
+
+# engineering/
+
+# roadmap/
+
+# design/
+
+# design-planning/
 
 Contains all product and engineering documentation.
 
@@ -339,39 +343,61 @@ Examples:
 Example
 
 ```
-backend/
+api/
 
 src/
+
+config/
+
+db/
+
+middleware/
 
 modules/
 
 auth/
 
-projects/
+organization/
 
-agents/
+project/
+
+environment/
+
+provider/
+
+model/
+
+runtime/
+
+conversation/
+
+message/
 
 memory/
 
-rag/
+retrieval/
 
-files/
+knowledge/
 
-conversations/
+document/
 
-users/
+embedding/
 
-common/
+tool/
 
-config/
+user/
+
+shared/
 ```
 
-Each module should include:
+Each module may include
 
 - Controller
 - Service
-- DTOs
-- Entities
+- Routes
+- Validation
+- Types
+- Repository
 - Tests
 
 ---
@@ -381,7 +407,7 @@ Each module should include:
 Example
 
 ```
-frontend/
+web/
 
 src/
 
@@ -395,7 +421,7 @@ hooks/
 
 services/
 
-store/
+contexts/
 
 types/
 
@@ -508,6 +534,10 @@ The project structure should support:
 - AI microservices
 - Shared SDKs
 - Plugin architecture
+- Additional AI providers
+- Additional tool implementations
+- Background workers
+- Streaming infrastructure
 
 Future expansion should require minimal reorganization.
 

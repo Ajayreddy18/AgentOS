@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -33,6 +33,36 @@ Every piece of code should strive to be:
 - Well documented
 
 Code should optimize for clarity before cleverness.
+
+# Architecture Rules
+
+The codebase follows a layered architecture.
+
+Allowed dependency flow:
+
+Controllers
+↓
+
+Services
+↓
+
+Domain Logic
+
+↓
+
+Repositories
+
+↓
+
+Database
+
+Rules:
+
+- Controllers must never access the database directly.
+- Business logic belongs in services.
+- Services should depend on abstractions rather than implementations where practical.
+- Avoid circular dependencies.
+- Shared packages must remain framework-independent.
 
 ---
 
@@ -209,6 +239,17 @@ interface Project {
 }
 ```
 
+# SOLID Principles
+
+The codebase should follow SOLID principles where appropriate.
+
+- Single Responsibility Principle
+- Open/Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle
+
+These principles should improve maintainability without introducing unnecessary abstraction.
 ---
 
 # React Standards
@@ -231,6 +272,24 @@ function ProjectCard() {
 }
 ```
 
+# Clean Code Guidelines
+
+Prefer:
+
+- Small functions
+- Early returns
+- Guard clauses
+- Descriptive variable names
+- Immutable data where practical
+
+Avoid:
+
+- Deep nesting
+- Long parameter lists
+- God classes
+- Large files
+- Hidden side effects
+
 ---
 
 # State Management
@@ -247,14 +306,17 @@ Avoid unnecessary global state.
 
 # Backend Standards
 
-Each NestJS module should contain:
+Each Express.js module should contain:
 
 ```
-controller
-service
-dto
-entity
-tests
+controller/
+service/
+dto/
+repository/
+schemas/
+validators/
+types/
+tests/
 ```
 
 Business logic belongs in services.
@@ -290,6 +352,20 @@ Example
 
 ---
 
+# API Design Rules
+
+Every endpoint should:
+
+- Validate requests.
+- Return typed responses.
+- Follow REST conventions.
+- Support pagination where appropriate.
+- Support filtering.
+- Return meaningful HTTP status codes.
+- Avoid breaking changes.
+
+---
+
 # Database Standards
 
 - Use descriptive table names.
@@ -299,6 +375,18 @@ Example
 - Keep migrations version controlled.
 
 ---
+
+# AI Agent Standards
+
+Every AI agent should:
+
+- Have one responsibility.
+- Use structured prompts.
+- Produce deterministic outputs where practical.
+- Never access persistence directly.
+- Use shared interfaces.
+- Return structured responses.
+- Log execution metadata.
 
 # Error Handling
 
@@ -333,6 +421,213 @@ Do not log:
 
 ---
 
+# Logging Levels
+
+Use structured logging.
+
+Levels:
+
+- DEBUG
+- INFO
+- WARN
+- ERROR
+
+Logs should include:
+
+- Request ID
+- User ID (when available)
+- Execution time
+- Module name
+
+---
+
+# Error Handling Standards
+
+Errors should be:
+
+- Typed
+- Logged
+- Actionable
+- User-friendly
+
+Avoid generic Error objects.
+
+Prefer domain-specific exceptions.
+
+---
+
+# Database Query Standards
+
+Prefer:
+
+- Indexed queries
+- Transactions where necessary
+- Pagination
+- Bulk operations
+- Optimistic updates
+
+Avoid:
+
+- N+1 queries
+- Full table scans
+- Duplicate queries
+
+---
+
+# Performance Guidelines
+
+Optimize:
+
+- Database queries
+- AI context size
+- Streaming responses
+- Memory retrieval
+- File processing
+
+Avoid premature optimization.
+
+Profile before optimizing.
+
+---
+
+# Secure Coding Practices
+
+Always:
+
+- Validate inputs
+- Escape outputs
+- Use parameterized queries
+- Protect secrets
+- Verify authorization
+- Sanitize uploaded files
+
+Never trust client input.
+
+---
+
+# Documentation Standards
+
+Every module should include:
+
+- Purpose
+- Responsibilities
+- Dependencies
+- Public APIs
+- Sequence diagrams when helpful
+- Examples where appropriate
+
+---
+
+# Git Workflow
+
+Use:
+
+main
+develop
+feature/*
+fix/*
+docs/*
+refactor/*
+
+---
+
+# Pull Request Standards
+
+Every PR should include:
+
+- Summary
+- Related issue
+- Testing performed
+- Documentation updates
+- Screenshots (UI changes)
+
+---
+
+# Monorepo Standards
+
+Shared packages should:
+
+- Avoid application-specific logic.
+- Export stable interfaces.
+- Remain independently testable.
+- Minimize cross-package dependencies.
+
+---
+
+# Definition of Ready
+
+Before implementation:
+
+- Requirements approved
+- APIs defined
+- Database changes reviewed
+- Acceptance criteria written
+- Dependencies identified
+
+---
+
+# AI Code Review Checklist
+
+Review:
+
+- Prompt quality
+- Memory updates
+- Retrieval accuracy
+- Tool usage
+- Token efficiency
+- Context size
+- Hallucination risks
+
+---
+
+# Complexity Guidelines
+
+Prefer:
+
+- Functions under 40 lines.
+- Files under 500 lines.
+- Classes with one responsibility.
+- Maximum nesting depth of 3.
+
+---
+
+# Dependency Injection
+
+Prefer dependency injection over manual instantiation.
+
+Avoid creating services using:
+
+new Service()
+
+within business logic.
+
+---
+
+# Async Programming Standards
+
+Use:
+
+- async/await
+- Proper error handling
+- Timeouts where appropriate
+- Cancellation support for long-running operations
+
+Avoid unhandled promises.
+
+---
+
+# Streaming Standards
+
+Streaming endpoints should:
+
+- Flush responses incrementally.
+- Handle client disconnects gracefully.
+- Support cancellation.
+- Emit structured events.
+- Record execution metadata.
+
+---
+
 # AI Prompt Standards
 
 Prompt templates should:
@@ -343,6 +638,32 @@ Prompt templates should:
 - Produce deterministic outputs where practical.
 
 Avoid embedding large prompts directly inside services.
+
+---
+
+# Prompt Engineering Standards
+
+Prompts should:
+
+- Be stored separately from business logic.
+- Have version numbers.
+- Use reusable templates.
+- Specify expected output format.
+- Minimize ambiguity.
+- Avoid unnecessary verbosity.
+
+---
+
+# Tool Development Standards
+
+Every tool should:
+
+- Declare an input schema.
+- Validate inputs.
+- Return structured outputs.
+- Be independently testable.
+- Remain stateless.
+- Avoid direct database access.
 
 ---
 
@@ -474,6 +795,30 @@ changes
 
 fix
 ```
+
+---
+
+# Memory Standards
+
+Memory updates should:
+
+- Avoid duplicate entries.
+- Generate concise summaries.
+- Preserve source references.
+- Store structured metadata.
+- Trigger embedding generation when required.
+
+---
+
+# Retrieval Standards
+
+Retrieval should:
+
+- Prefer semantic relevance.
+- Apply metadata filtering.
+- Remove duplicate chunks.
+- Limit context size.
+- Preserve source attribution.
 
 ---
 

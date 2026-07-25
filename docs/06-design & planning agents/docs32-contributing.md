@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -85,7 +85,7 @@ Merge
 
 Before contributing, install:
 
-- Node.js (LTS)
+- Express.js (LTS)
 - npm
 - Git
 - Docker Desktop

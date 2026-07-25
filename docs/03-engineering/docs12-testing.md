@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -51,7 +67,9 @@ AgentOS follows these testing principles:
 # Testing Pyramid
 
 ```
-                End-to-End Tests
+               End-to-End Tests
+                      ▲
+               API Contract Tests
                       ▲
               Integration Tests
                       ▲
@@ -83,6 +101,17 @@ Each module behaves correctly without external dependencies.
 
 ---
 
+# Unit Testing Examples
+
+- Runtime Loader
+- Provider Registry
+- Tool Runtime
+- Tool Registry
+- Planner
+- Retrieval Service
+
+---
+
 # Integration Testing
 
 Purpose
@@ -92,7 +121,11 @@ Verify communication between components.
 Examples
 
 - API ↔ Database
-- Backend ↔ AI Services
+- - Backend ↔ Provider Registry
+- Runtime ↔ Retrieval Service
+- Runtime ↔ Tool Runtime
+- Runtime ↔ Memory Service
+- Runtime ↔ Knowledge Base
 - Backend ↔ Memory System
 - Backend ↔ RAG Pipeline
 - Backend ↔ File Storage
@@ -119,23 +152,35 @@ Create Project
 
 ↓
 
-Upload Files
+Upload Documents
 
 ↓
 
-Start Conversation
+Runtime Loaded
 
 ↓
 
-AI Agents Execute
+Retrieval Executed
+
+↓
+
+Planner
+
+↓
+
+Tool Execution
+
+↓
+
+LLM Response
+
+↓
+
+Streaming Response
 
 ↓
 
 Memory Updated
-
-↓
-
-Documentation Generated
 
 ↓
 
@@ -157,6 +202,11 @@ Verify:
 - Response formats
 - Error handling
 - HTTP status codes
+- Streaming APIs (SSE)
+- Pagination
+- Validation middleware
+- Error middleware
+- Rate limiting
 
 Every endpoint should be tested for both successful and failure scenarios.
 
@@ -186,6 +236,11 @@ Verify:
 - Prompt handling
 - Error recovery
 - Collaboration with the Agent Orchestrator
+- Planner
+- Runtime
+- Provider selection
+- Tool execution
+- Response streaming
 
 ---
 
@@ -193,11 +248,13 @@ Verify:
 
 Verify:
 
-- Agent selection
-- Execution order
-- Context sharing
-- Failure handling
-- Response aggregation
+- Runtime initialization
+- Planner execution
+- Retrieval execution
+- Tool execution
+- Provider execution
+- Streaming responses
+- Memory updates
 
 ---
 
@@ -211,6 +268,9 @@ Verify:
 - Duplicate detection
 - Project isolation
 - Retrieval accuracy
+- Conversation retrieval
+- Knowledge Base retrieval
+- Embedding retrieval
 
 ---
 
@@ -225,6 +285,10 @@ Verify:
 - Vector storage
 - Semantic retrieval
 - Context assembly
+- Knowledge Base indexing
+- Vector similarity search
+- Retrieval ranking
+- Context assembly
 
 ---
 
@@ -238,6 +302,43 @@ Verify:
 - Duplicate uploads
 - Corrupted files
 - Unauthorized uploads
+
+---
+
+# Tool Runtime Testing
+
+Verify:
+
+- Tool registration
+- Tool discovery
+- Tool execution
+- Invalid tool handling
+- Tool parameter validation
+
+---
+
+# Provider Testing
+
+Verify:
+
+- Provider loading
+- Model selection
+- Provider switching
+- API failures
+- Streaming responses
+
+---
+
+# Runtime Testing
+
+Verify:
+
+- Runtime loading
+- Runtime configuration
+- Model configuration
+- Prompt loading
+- Tool loading
+- Retrieval integration
 
 ---
 
@@ -279,6 +380,10 @@ Verify protection against:
 - Path Traversal
 - File Upload Abuse
 - Rate Limit Abuse
+- JWT validation
+- Organization isolation
+- Environment isolation
+- Provider authorization
 
 ---
 
@@ -292,6 +397,10 @@ Measure:
 - RAG retrieval time
 - File upload speed
 - Database query performance
+- Embedding generation time
+- Runtime initialization
+- Streaming first-token latency
+- Retrieval latency
 
 Performance metrics should be monitored over time.
 
@@ -306,6 +415,9 @@ Simulate:
 - Concurrent AI requests
 - Large document uploads
 - Simultaneous file indexing
+- Concurrent streaming requests
+- Concurrent tool execution
+- Large Knowledge Bases
 
 The system should remain stable under expected load.
 
@@ -360,6 +472,10 @@ Version 1 should include:
 - Test database
 - Mock AI services where appropriate
 - Sample project data
+- Local LLM providers
+- Cloud LLM providers
+- Mock embedding provider
+- Sample Knowledge Base
 
 Production data should never be used for testing.
 
@@ -375,6 +491,11 @@ Future versions may include:
 - AI response quality evaluation
 - Multi-user collaboration testing
 - Canary deployments
+- Contract testing
+- Snapshot testing
+- Tool testing automation
+- AI evaluation benchmarks
+- Retrieval quality benchmarks
 
 ---
 
@@ -411,3 +532,17 @@ A release should proceed only if:
 Testing is an essential part of AgentOS development.
 
 Every layer of the platform—including frontend, backend, AI agents, memory, RAG, APIs, and security—must be validated to ensure a reliable and production-ready software engineering workspace.
+
+# Current Version 1 Coverage
+
+Version 1 testing includes:
+
+- Authentication
+- Runtime
+- Provider Registry
+- Tool Runtime
+- Retrieval Service
+- Memory Service
+- Knowledge Base
+- Streaming Responses
+- REST APIs

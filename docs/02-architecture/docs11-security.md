@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -17,6 +17,22 @@ This document defines the security architecture for AgentOS Version 1.
 It outlines how user identities, project data, AI interactions, uploaded files, APIs, and infrastructure are protected against unauthorized access, misuse, and common security threats.
 
 This document serves as the security baseline for the entire platform.
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -61,6 +77,10 @@ Authentication features include:
 - Password hashing
 - Session validation
 - Token expiration
+- Access Tokens
+- Refresh Tokens (future)
+- Email verification (optional)
+- Secure password hashing (bcrypt)
 
 Passwords must never be stored in plain text.
 
@@ -77,6 +97,14 @@ Users may only access:
 - Their own conversations
 - Their own uploaded files
 - Their own project memory
+
+Authorization is enforced at:
+
+- Organization level
+- Project level
+- Environment level
+- Conversation level
+- Resource level
 
 Unauthorized requests should be rejected.
 
@@ -99,7 +127,14 @@ Password reset functionality should use secure, time-limited tokens.
 
 Every protected API should require:
 
-Authorization: Bearer <JWT>
+Authorization: Bearer <ACCESS_TOKEN>
+
+Every request passes through:
+
+- Authentication Middleware
+- Authorization Middleware
+- Request Validation
+- Error Handling Middleware
 
 APIs should also:
 
@@ -137,6 +172,10 @@ Uploaded files should be:
 - Virus scanned (future enhancement)
 - Stored outside the public web root
 - Associated with a specific project
+- Maximum upload size
+- MIME type validation
+- Duplicate detection
+- Project ownership validation
 
 Unsupported file types should be rejected.
 
@@ -153,7 +192,12 @@ A user should never be able to:
 - Access another user's conversations
 - Retrieve another user's embeddings
 
-Every query should verify project ownership.
+Every database query must verify:
+
+- Organization ownership
+- Project ownership
+- Conversation ownership
+- Resource ownership
 
 ---
 
@@ -168,6 +212,12 @@ Persistent memory should:
 
 Sensitive information should not be stored unnecessarily.
 
+Memory retrieval must always filter by:
+
+- Organization
+- Project
+- Conversation
+
 ---
 
 # RAG Security
@@ -179,7 +229,36 @@ The retrieval engine should:
 - Prevent retrieval across unrelated projects.
 - Respect user permissions.
 
+The Retrieval Service must never retrieve:
+
+- Documents from another project
+- Embeddings from another organization
+- Unauthorized conversation history
+
 ---
+
+# AI Security
+
+AI requests should:
+
+- Validate tool execution
+- Restrict available tools
+- Prevent unauthorized tool access
+- Sanitize retrieved context
+- Record AI execution logs
+
+---
+
+# Provider Security
+
+AI providers are accessed through the Provider Registry.
+
+The provider layer should:
+
+- Hide provider credentials
+- Validate provider configuration
+- Prevent unauthorized provider usage
+- Log provider failures without exposing secrets
 
 # Secret Management
 
@@ -196,6 +275,16 @@ Secrets should:
 - Be stored using environment variables.
 - Be rotated when necessary.
 
+Version 1 stores secrets using environment variables.
+
+Examples:
+
+- DATABASE_URL
+- JWT_SECRET
+- GROQ_API_KEY
+- OPENAI_API_KEY
+- ANTHROPIC_API_KEY
+
 ---
 
 # Logging
@@ -211,6 +300,14 @@ The system should log:
 - Security-related events
 
 Sensitive data should never appear in logs.
+
+Application logs should exclude:
+
+- Passwords
+- JWT tokens
+- API keys
+- Provider secrets
+- Personally identifiable information (PII)
 
 ---
 
@@ -234,6 +331,15 @@ Audit records should include:
 - Action
 - Resource
 - Result
+
+Examples include:
+
+- Authentication
+- Project updates
+- Agent execution
+- Tool execution
+- Knowledge Base updates
+- Document uploads
 
 ---
 
@@ -282,6 +388,11 @@ Potential risks include:
 - Credential theft
 - Data leakage
 - Denial of Service
+- Tool misuse
+- Prompt leakage
+- Context poisoning
+- Retrieval poisoning
+- Secret exposure
 
 Each identified risk should have appropriate mitigation strategies.
 
@@ -299,6 +410,12 @@ Future versions may include:
 - Secret vault integration
 - Web Application Firewall
 - Security monitoring dashboards
+- Row-Level Security (RLS)
+- OAuth Providers
+- API Key Management
+- Fine-grained permissions
+- Secret Manager integration
+- AI Guardrails
 
 ---
 
@@ -315,6 +432,14 @@ Before every release:
 - Dependencies updated
 - Security vulnerabilities scanned
 
+Validation includes:
+
+- Request body
+- URL parameters
+- Query parameters
+- File metadata
+- AI tool parameters
+
 ---
 
 # Conclusion
@@ -322,3 +447,15 @@ Before every release:
 Security is a foundational aspect of AgentOS.
 
 Every component—including APIs, AI agents, memory, RAG, files, and databases—must enforce authentication, authorization, validation, and project isolation to protect user data and maintain trust.
+
+# Current Version 1 Implementation
+
+Version 1 includes:
+
+- JWT Authentication
+- Password Hashing
+- Authorization Middleware
+- Request Validation
+- Project Isolation
+- Provider Secret Management
+- Runtime Authorization

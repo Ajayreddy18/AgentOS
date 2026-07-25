@@ -2,7 +2,7 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
@@ -33,9 +33,43 @@ The workflow should:
 
 ---
 
+# Git Workflow Principles
+
+The Git workflow follows these principles:
+
+- Small, focused changes
+- Frequent commits
+- Traceable history
+- Automated validation
+- Safe releases
+- Easy rollback
+- Continuous integration
+- Documentation alongside implementation
+
+# Continuous Integration
+
+Every Pull Request should automatically execute:
+
+- Type checking
+- Linting
+- Unit tests
+- Integration tests
+- Build verification
+
+Pull Requests should not be merged if any required check fails.
+
 # Branching Strategy
 
 Version 1 uses a simplified Git Flow.
+
+Branch creation rules:
+
+- Feature branches are created from develop.
+- Bugfix branches are created from develop.
+- Release branches are created from develop.
+- Hotfix branches are created from main.
+
+Completed branches should be merged back into their appropriate parent branch and deleted after merge.
 
 ```
 main
@@ -53,7 +87,35 @@ main
 
 ---
 
+# Branch Cleanup
+
+After a branch has been merged:
+
+- Delete feature branches.
+- Delete bugfix branches.
+- Delete release branches after deployment.
+- Delete hotfix branches after synchronization.
+
+---
+
 # Branch Purpose
+
+develop
+│
+▼
+feature/*
+│
+▼
+develop
+│
+▼
+release/*
+│
+▼
+main
+│
+▼
+tag
 
 ## main
 
@@ -192,10 +254,14 @@ chore: update dependencies
 
 Commits should:
 
-- Represent a single logical change.
+- Represent one logical change.
 - Build successfully.
-- Pass linting.
+- Pass linting and tests where applicable.
+- Be independently reversible.
 - Avoid unrelated modifications.
+- Be small enough for easy review.
+
+Prefer multiple small commits over one large commit.
 
 Avoid large "everything" commits.
 
@@ -207,9 +273,12 @@ Every Pull Request should include:
 
 - Clear title
 - Summary of changes
+- Motivation
 - Testing performed
 - Related issue (if applicable)
-- Updated documentation (if required)
+- Documentation updates
+- Breaking changes (if any)
+- Screenshots for UI changes
 
 ---
 
@@ -227,28 +296,54 @@ Before merging:
 
 ---
 
+# Pull Request Size
+
+Pull Requests should remain focused.
+
+Prefer:
+
+- One feature per Pull Request.
+- Fewer than 500 changed lines when practical.
+- Independent reviewable changes.
+
 # Code Review Guidelines
 
 Reviewers should verify:
 
-- Correctness
+- Functional correctness
+- Architecture consistency
 - Readability
-- Simplicity
 - Security
 - Performance
+- Error handling
 - Test coverage
 - Documentation
+- Naming conventions
+- Maintainability
 
 Feedback should focus on improving the code rather than criticizing the developer.
 
 ---
 
+# Merge Conflict Resolution
+
+Before opening a Pull Request:
+
+- Update the branch from develop.
+- Resolve merge conflicts locally.
+- Re-run tests.
+- Verify the application builds successfully.
+
+---
+
 # Merge Strategy
 
-Use:
+Preferred merge strategy:
 
-```
-Squash and Merge
+- Squash and Merge for feature branches.
+- Merge Commit only when branch history should be preserved.
+- Avoid rebasing shared branches after they have been published.
+
 ```
 
 Benefits
@@ -266,12 +361,25 @@ Avoid unnecessary merge commits.
 Use Semantic Versioning.
 
 ```
-MAJOR.MINOR.PATCH
+
+MAJOR
+
+Breaking API changes
+
+MINOR
+
+Backward-compatible features
+
+PATCH
+
+Backward-compatible bug fixes
+
 ```
 
 Examples
 
 ```
+
 1.0.0
 
 1.1.0
@@ -279,6 +387,7 @@ Examples
 1.2.3
 
 2.0.0
+
 ```
 
 ---
@@ -286,6 +395,7 @@ Examples
 # Release Process
 
 ```
+
 Feature Complete
 
 ↓
@@ -319,7 +429,21 @@ Deploy
 ↓
 
 Merge back into develop
+
 ```
+
+---
+
+# Release Checklist
+
+Before creating a production release:
+
+- All tests pass.
+- Documentation is updated.
+- Version number is verified.
+- Database migrations are reviewed.
+- Release notes are complete.
+- Security review completed.
 
 ---
 
@@ -330,11 +454,13 @@ Every production release should be tagged.
 Examples
 
 ```
+
 v1.0.0
 
 v1.1.0
 
 v1.2.0
+
 ```
 
 Tags provide a permanent reference to released versions.
@@ -351,9 +477,11 @@ Protect the following branches:
 Recommended protections:
 
 - Prevent force pushes.
-- Require successful CI checks.
-- Require pull requests.
-- Require review before merge.
+- Require Pull Requests.
+- Require successful CI.
+- Require at least one approval.
+- Require resolved conversations.
+- Automatically delete merged branches.
 
 ---
 
@@ -377,13 +505,27 @@ Use `.gitignore` appropriately.
 Typical ignored files include:
 
 ```
+
 node_modules/
 dist/
-build/
 coverage/
+
 .env
 .env.local
-*.log
+
+uploads/
+logs/
+tmp/
+
+.vector-cache/
+embeddings/
+
+*.db
+*.sqlite
+
+.vscode/
+.idea/
+
 ```
 
 The `.gitignore` file should be maintained as the project evolves.
@@ -401,6 +543,43 @@ Each release should document:
 - Known issues
 
 Release notes improve communication with users and contributors.
+
+---
+
+# Monorepo Workflow
+
+When shared packages are modified:
+
+- Verify all dependent applications build successfully.
+- Execute affected test suites.
+- Avoid unnecessary cross-package dependencies.
+
+---
+
+# Documentation Policy
+
+Documentation should be updated whenever:
+
+- APIs change.
+- Database schema changes.
+- Architecture changes.
+- User workflows change.
+
+Implementation and documentation should remain synchronized.
+
+---
+
+# AI Feature Workflow
+
+AI-related changes should verify:
+
+- Prompt updates
+- Tool execution
+- Memory updates
+- Retrieval quality
+- Streaming responses
+- Token efficiency
+- Structured outputs
 
 ---
 
@@ -422,10 +601,11 @@ Rollbacks should be quick and well documented.
 
 Dependency upgrades should:
 
-- Be reviewed.
+- Review release notes.
+- Check security advisories.
 - Pass automated testing.
-- Include release notes if significant.
-- Avoid unnecessary version changes.
+- Update lock files.
+- Document breaking changes.
 
 ---
 
@@ -473,3 +653,4 @@ Future versions may include:
 A disciplined Git workflow keeps the AgentOS repository organized, traceable, and production-ready.
 
 By following consistent branching, commit, review, and release practices, the project can grow without sacrificing maintainability or development quality.
+```

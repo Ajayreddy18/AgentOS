@@ -2,11 +2,22 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+## Related Documents
+
+- Product Requirements
+- System Architecture
+- API Design
+- AI Agent Design
+- Memory Design
+- RAG Design
 
 ---
 
@@ -38,6 +49,18 @@ Every feature should:
 - Maintain simplicity.
 - Avoid unnecessary complexity.
 - Be validated before expansion.
+
+---
+
+# Roadmap Decision Rules
+
+A feature may be included only if it:
+
+- Solves a validated user problem
+- Fits the current product vision
+- Can be maintained long-term
+- Does not significantly delay the current release
+- Does not duplicate existing functionality
 
 ---
 

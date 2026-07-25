@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -45,6 +61,9 @@ The RAG system follows these principles:
 - Modular pipeline
 - Efficient context assembly
 - Extensible architecture
+- Runtime-aware retrieval
+- Provider independent
+- Memory-first retrieval
 
 ---
 
@@ -60,6 +79,9 @@ Version 1 retrieves knowledge from:
 - Project documentation
 - Project memory
 - Previous conversations
+- Knowledge Base
+- Conversation Memory
+- Runtime Memory
 
 Future versions may support additional structured and external knowledge sources.
 
@@ -78,15 +100,15 @@ Validate File
 
 ↓
 
+Store Document
+
+↓
+
 Extract Text
 
 ↓
 
-Clean Text
-
-↓
-
-Split into Chunks
+Chunk Document
 
 ↓
 
@@ -98,15 +120,15 @@ Create Embeddings
 
 ↓
 
-Store Vector
+Store in Knowledge Base
 
 ↓
 
-Update Search Index
+Index with pgvector
 
 ↓
 
-Available for Retrieval
+Available to Retrieval Engine
 ```
 
 ---
@@ -142,6 +164,9 @@ Each chunk should include:
 - Position
 - Content
 - Metadata
+- Knowledge Base ID
+- Document ID
+- Embedding ID
 
 ---
 
@@ -163,7 +188,7 @@ Metadata enables efficient filtering and retrieval.
 
 # Embedding Generation
 
-Each chunk is converted into a vector representation using an embedding model.
+Each chunk is converted into an embedding using the configured embedding provider. The embedding is stored together with its document, metadata, and project association inside the Knowledge Base.
 
 The resulting embedding is stored alongside its metadata and original content.
 
@@ -191,39 +216,47 @@ All vectors remain isolated by project.
 When a user submits a request:
 
 ```
-User Question
+User Request
 
 ↓
 
-Agent Orchestrator
+Runtime Loaded
 
 ↓
 
-Identify Project
+Retrieval Service
 
 ↓
 
-Query Vector Store
+Knowledge Base Search
 
 ↓
 
-Retrieve Relevant Chunks
+Project Memory Search
 
 ↓
 
-Retrieve Related Memory
+Conversation Search
 
 ↓
 
-Merge Context
+Semantic Ranking
 
 ↓
 
-Send Context to AI Agents
+Context Assembly
 
 ↓
 
-Generate Response
+Planner / Tool Selection
+
+↓
+
+LLM Provider
+
+↓
+
+Streaming Response
 ```
 
 ---
@@ -237,6 +270,9 @@ Retrieved chunks are ranked using factors such as:
 - Metadata filters
 - Recency
 - Memory importance
+- Embedding similarity score
+- Runtime filters
+- Document freshness
 
 Higher-ranked results are prioritized during context assembly.
 
@@ -247,10 +283,11 @@ Higher-ranked results are prioritized during context assembly.
 The Retrieval Engine combines information from:
 
 - Retrieved document chunks
-- Project memory
-- Relevant conversations
-- Task history
-- Documentation
+- Knowledge Base
+- Project Memory
+- Conversation History
+- Runtime Context
+- Relevant Documentation
 
 Duplicate or low-value information is removed before sending context to AI agents.
 
@@ -260,13 +297,27 @@ Duplicate or low-value information is removed before sending context to AI agent
 
 The RAG system works alongside the persistent memory system.
 
-Project memory stores structured knowledge.
+Project Memory stores structured summaries.
 
-RAG retrieves detailed supporting information from indexed documents.
+Knowledge Base stores searchable documents.
+
+Retrieval Service combines both before sending context to the Runtime.
 
 Together they provide concise summaries and detailed references.
 
 ---
+
+# Runtime Integration
+
+The Runtime loads the active project configuration including:
+
+- Selected Provider
+- Selected Model
+- System Prompt
+- Available Tools
+- Retrieved Context
+
+The Retrieval Service prepares the context before the request is sent to the configured LLM provider.
 
 # Security Considerations
 
@@ -288,6 +339,9 @@ The retrieval pipeline should:
 - Cache frequently accessed embeddings where appropriate.
 - Support incremental indexing.
 - Handle large document collections efficiently.
+- Parallel retrieval
+- Embedding cache
+- Streaming-compatible retrieval
 
 ---
 
@@ -316,6 +370,12 @@ Future versions may include:
 - External documentation connectors
 - Incremental embedding updates
 - Multi-modal retrieval
+- Hybrid retrieval (BM25 + Vector)
+- Query rewriting
+- Parent-child retrieval
+- Context compression
+- Multi-vector retrieval
+- Agent-specific retrieval
 
 ---
 
@@ -338,3 +398,15 @@ The RAG system should always be:
 The Retrieval-Augmented Generation system enables AgentOS to provide context-aware AI assistance by combining semantic search, structured project memory, and indexed project knowledge.
 
 By retrieving only the most relevant information for each request, the system improves response quality, reduces unnecessary context, and supports long-running software engineering projects.
+
+# Current Version 1 Implementation
+
+Version 1 includes:
+
+- Document Upload
+- Knowledge Base
+- Embedding Generation
+- pgvector Storage
+- Semantic Retrieval
+- Runtime Context Assembly
+- Provider-independent Retrieval Pipeline

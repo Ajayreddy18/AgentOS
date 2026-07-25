@@ -2,11 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
+
+---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 ---
 
@@ -38,7 +54,7 @@ Sign Up
 
 ↓
 
-Verify Account (optional for MVP)
+Verify Account (Future Version)
 
 ↓
 
@@ -46,7 +62,7 @@ Create Profile
 
 ↓
 
-Welcome Screen
+Organization Dashboard
 
 ↓
 
@@ -96,10 +112,6 @@ Enter Project Name
 
 ↓
 
-Select Project Type
-
-↓
-
 Describe Project Idea
 
 ↓
@@ -112,7 +124,7 @@ Project Workspace Opens
 
 ↓
 
-Planner Agent Generates Initial Plan
+Project Environment Created
 
 ## Information Collected
 
@@ -147,23 +159,23 @@ Select Task
 
 ↓
 
-Planner Agent
+Conversation
 
 ↓
 
-Research Agent
+Runtime Configuration
 
 ↓
 
-Backend Agent
+Knowledge Retrieval (RAG)
 
 ↓
 
-Frontend Agent
+LLM Provider
 
 ↓
 
-Reviewer Agent
+Streaming Response
 
 ↓
 
@@ -201,7 +213,7 @@ Open Project
 
 ↓
 
-Upload Files
+Upload Documents
 
 ↓
 
@@ -232,7 +244,7 @@ Agents Learn Project Context
 - Store files
 - Index documents
 - Build searchable knowledge
-- Improve AI responses using RAG
+- Improve AI responses using Retrieval-Augmented Generation (RAG)
 
 ---
 
@@ -248,27 +260,31 @@ Help users complete a software engineering task efficiently.
 
 ## User Flow
 
-Create Task
+Start Conversation
 
 ↓
 
-Planner Agent Creates Plan
+User Prompt
 
 ↓
 
-Research Agent Collects Information
+Runtime Loads
 
 ↓
 
-Backend Agent Generates APIs
+Knowledge Retrieved
 
 ↓
 
-Frontend Agent Builds UI
+LLM Generates Response
 
 ↓
 
-Reviewer Agent Reviews Code
+Streaming Response
+
+↓
+
+Conversation Saved
 
 ↓
 
@@ -311,7 +327,7 @@ Project Memory Loaded
 
 ↓
 
-Recent Tasks Displayed
+Recent Conversations Displayed
 
 ↓
 
@@ -334,14 +350,14 @@ Continue Development
 
 # Journey Summary
 
-| Journey          | User Goal                | AgentOS Responsibility       |
-| ---------------- | ------------------------ | ---------------------------- |
-| Onboarding       | Start quickly            | Create workspace             |
-| New Project      | Begin development        | Initialize project           |
-| AI Collaboration | Build software           | Coordinate agents            |
-| File Upload      | Share project knowledge  | Build project memory         |
-| Task Completion  | Finish development tasks | Execute multi-agent workflow |
-| Resume Project   | Continue work            | Restore project context      |
+| Journey          | User Goal                | AgentOS Responsibility                     |
+| ---------------- | ------------------------ | ------------------------------------------ |
+| Onboarding       | Start quickly            | Create workspace                           |
+| New Project      | Begin development        | Initialize project                         |
+| AI Collaboration | Build software           | Coordinate agents                          |
+| File Upload      | Share project knowledge  | Build project memory                       |
+| Conversation     | Finish development tasks | Retrieve context and generate AI responses |
+| Resume Project   | Continue work            | Restore project context                    |
 
 ---
 
@@ -353,7 +369,7 @@ AgentOS Version 1 will:
 
 - Be project-centric rather than chat-centric.
 - Preserve project memory automatically.
-- Coordinate specialized AI agents.
+- Support configurable AI runtimes and future multi-agent collaboration.
 - Keep every project isolated.
 - Track development history.
 - Support long-running software projects.
@@ -373,7 +389,7 @@ The following are intentionally excluded from Version 1:
 
 The user journeys reveal several recurring needs across all personas.
 
-- Users should create projects before interacting with AI.
+- Users should organize work using Organizations, Projects, and Environments before interacting with AI.
 - Project memory must persist across sessions.
 - AI agents should collaborate automatically.
 - Files are essential for maintaining project context.

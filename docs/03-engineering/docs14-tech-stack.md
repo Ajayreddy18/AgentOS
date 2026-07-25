@@ -2,13 +2,27 @@
 
 Version: 1.0
 
-Status: Draft
+Status: Version 1.0
 
 Owner: Ajay Reddy
 
 Last Updated: July 2026
 
 ---
+
+Repository Structure
+
+apps/
+├── api/ Backend API
+└── web/ React Frontend
+
+docs/
+├── product/
+├── architecture/
+├── engineering/
+├── design/
+├── roadmap/
+└── design-planning/
 
 # Document Purpose
 
@@ -38,26 +52,27 @@ Every technology should satisfy most of the following criteria:
 
 # High-Level Technology Stack
 
-| Layer             | Technology            |
-| ----------------- | --------------------- |
-| Frontend          | React                 |
-| Language          | TypeScript            |
-| Styling           | Tailwind CSS          |
-| Backend           | NestJS                |
-| Runtime           | Node.js               |
-| ORM               | Prisma                |
-| Database          | PostgreSQL            |
-| Vector Database   | pgvector              |
-| Authentication    | JWT                   |
-| AI Provider       | Configurable LLM APIs |
-| Package Manager   | pnpm                  |
-| Version Control   | Git                   |
-| Containerization  | Docker                |
-| API Documentation | Swagger / OpenAPI     |
-| Testing           | Vitest, Playwright    |
-| CI/CD             | GitHub Actions        |
-| Code Quality      | ESLint + Prettier     |
-| GitHooks          | Husky + lint-staged   |
+| Layer               | Technology           |
+| ------------------- | -------------------- |
+| Frontend            | React + Vite         |
+| Language            | TypeScript           |
+| Styling             | Tailwind CSS         |
+| Backend             | Express.js           |
+| Runtime             | Express.js           |
+| ORM                 | Drizzle ORM          |
+| Database            | PostgreSQL           |
+| Vector Database     | pgvector             |
+| Authentication      | JWT                  |
+| Validation          | Zod                  |
+| AI Provider Layer   | Provider Abstraction |
+| Initial AI Provider | Groq                 |
+| Package Manager     | npm                  |
+| Version Control     | Git                  |
+| Containerization    | Docker               |
+| API Testing         | Bruno                |
+| Testing             | Vitest               |
+| CI/CD               | GitHub Actions       |
+| Code Quality        | ESLint + Prettier    |
 
 ---
 
@@ -152,7 +167,7 @@ Tailwind CSS provides flexibility while avoiding unnecessary UI framework constr
 
 ## Technology
 
-NestJS
+Express.js
 
 ### Purpose
 
@@ -175,15 +190,24 @@ Implement backend APIs and business logic.
 
 ### Decision
 
-NestJS provides structure and maintainability for a growing backend.
+Express provides structure and maintainability for a growing backend.
 
 ---
 
 # Runtime
 
+Version 1 also includes a Runtime Engine responsible for:
+
+- Runtime loading
+- Model selection
+- Provider selection
+- Tool loading
+- Prompt configuration
+- Retrieval configuration
+
 ## Technology
 
-Node.js
+Express.js
 
 ### Purpose
 
@@ -194,7 +218,7 @@ Execute backend services.
 - Excellent ecosystem
 - Asynchronous architecture
 - Large package ecosystem
-- Works naturally with NestJS
+- Works naturally with Express
 
 ---
 
@@ -231,7 +255,7 @@ PostgreSQL supports both relational data and vector search through pgvector.
 
 ## Technology
 
-Prisma
+Drizzle ORM
 
 ### Purpose
 
@@ -302,9 +326,35 @@ Authenticate users securely.
 
 # AI Integration
 
+## Runtime Components
+
+Version 1 Runtime includes:
+
+- Runtime Loader
+- Planner
+- Memory Manager
+- Retrieval Engine
+- Tool Registry
+- Tool Runtime
+- Tool Executor
+
+## Provider Layer
+
+The Provider Layer abstracts AI providers behind a common interface.
+
+Responsibilities:
+
+- Model selection
+- Request formatting
+- Streaming responses
+- Tool calling
+- Provider switching
+
+This allows the rest of the application to remain provider-independent.
+
 ## Technology
 
-Configurable LLM Providers
+Provider Abstarction Layer
 
 ### Purpose
 
@@ -312,9 +362,10 @@ Provide AI capabilities.
 
 ### Initial Providers
 
+- Groq
 - OpenAI
-- Anthropic
-- Local models (future)
+- OpenRouter
+- Ollama (Local Models)
 
 ### Design Principle
 
@@ -342,7 +393,7 @@ The storage layer should be abstracted to simplify future migration.
 
 ## Technology
 
-pnpm
+npm
 
 ### Why We Chose It
 
@@ -368,7 +419,9 @@ Provide consistent development and deployment environments.
 
 ## Technology
 
-Swagger / OpenAPI
+Planned for Future Version
+
+Current API testing is performed using Bruno.
 
 ### Purpose
 
@@ -384,7 +437,9 @@ Vitest
 
 ## End-to-End Testing
 
-Playwright
+Bruno (API Testing)
+
+Manual Integration Testing
 
 ### Why
 
@@ -418,27 +473,31 @@ Automate:
 | GitHub          | Repository hosting  |
 | Docker Desktop  | Local containers    |
 | Postman / Bruno | API testing         |
-| Prisma Studio   | Database inspection |
+| Drizzle Studio  | Database inspection |
+| Ollama          | Local LLM Runtime   |
+| Docker Compose  | Local Development   |
 
 ---
 
 # Technology Decision Summary
 
-| Area             | Selected Technology   |
-| ---------------- | --------------------- |
-| Frontend         | React                 |
-| Language         | TypeScript            |
-| Styling          | Tailwind CSS          |
-| Backend          | NestJS                |
-| Runtime          | Node.js               |
-| Database         | PostgreSQL            |
-| ORM              | Prisma                |
-| Vector Search    | pgvector              |
-| Authentication   | JWT                   |
-| AI Integration   | Configurable LLM APIs |
-| Testing          | Vitest + Playwright   |
-| CI/CD            | GitHub Actions        |
-| Containerization | Docker                |
+| Area             | Selected Technology |
+| ---------------- | ------------------- |
+| Frontend         | React               |
+| Language         | TypeScript          |
+| Styling          | Tailwind CSS        |
+| Backend          | Express             |
+| Runtime          | Express.js          |
+| Database         | PostgreSQL          |
+| ORM              | Drizzle ORM         |
+| Vector Search    | pgvector            |
+| Authentication   | JWT                 |
+| AI Integration   | Provider Layer      |
+| Testing          | Vitest + Playwright |
+| CI/CD            | GitHub Actions      |
+| Containerization | Docker              |
+| Package Manager  | npm                 |
+| API Testing      | Bruno               |
 
 ---
 
@@ -453,6 +512,9 @@ Future versions may evaluate:
 - Dedicated Vector Databases
 - Multi-region deployments
 - AI Gateway services
+- MCP (Model Context Protocol)
+- Agent-to-Agent Communication
+- Distributed Runtime Workers
 
 Technology should evolve only when required by product growth.
 
