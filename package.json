@@ -19,7 +19,7 @@
     "db:generate": "npm --workspace @agentos/api exec drizzle-kit generate",
     "db:push": "npm --workspace @agentos/api exec drizzle-kit push",
     "db:studio": "npm --workspace @agentos/api exec drizzle-kit studio",
-    "build": "echo \"Workspace is not configured yet\"",
+    "build": "npm --workspace @agentos/api run build && npm --workspace @agentos/web run build",
     "lint": "eslint .",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
