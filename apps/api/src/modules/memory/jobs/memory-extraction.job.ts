@@ -26,7 +26,6 @@ export class MemoryExtractionJob implements Job {
       payload.ownerId,
       payload.agentId,
       payload.userMessage,
-      payload.assistantReply,
     );
 
     logger.info(

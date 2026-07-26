@@ -14,13 +14,8 @@ export class MemoryManager {
     return this.retriever.retrieve(agentId, query);
   }
 
-  async extractAndStore(
-    ownerId: string,
-    agentId: string,
-    userMessage: string,
-    assistantReply: string,
-  ) {
-    const extracted = this.extractor.extract(userMessage, assistantReply);
+  async extractAndStore(ownerId: string, agentId: string, userMessage: string) {
+    const extracted = this.extractor.extract(userMessage);
     logger.debug(
       {
         extractedCount: extracted.length,
