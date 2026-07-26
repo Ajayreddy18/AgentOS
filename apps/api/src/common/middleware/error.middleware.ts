@@ -1,11 +1,17 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 import { AppError } from "../errors/app-error";
 import { logger } from "../logger/logger";
 import { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import { ZodError } from "zod";
 
-export function errorMiddleware(error: unknown, req: Request, res: Response) {
+export function errorMiddleware(
+  error: unknown,
+  req: Request,
+  res: Response,
+  _next: NextFunction,
+) {
+  void _next;
   if (error instanceof TokenExpiredError) {
     return res.status(401).json({
       success: false,
