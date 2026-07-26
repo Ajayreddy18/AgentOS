@@ -19,6 +19,11 @@ export function rateLimitMiddleware(
 
   const key = req.ip ?? req.headers["x-forwarded-for"]?.toString() ?? "unknown";
 
+  console.log({
+    ip: req.ip,
+    forwarded: req.headers["x-forwarded-for"],
+  });
+
   const entry = store.increment(key, config.windowMs);
 
   const remaining = Math.max(0, config.maxRequests - entry.count);
