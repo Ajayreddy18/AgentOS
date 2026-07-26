@@ -2,14 +2,11 @@
   "compilerOptions": {
     "target": "ES2022",
     "strict": true,
-    "baseUrl": ".",
-    "paths": {},
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
     "types": ["node"],
     "ignoreDeprecations": "6.0"
   }
