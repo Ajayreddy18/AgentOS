@@ -2,7 +2,9 @@
 
 # AgentOS
 
-### Production-Grade AI Operating System for Collaborative AI Agents
+### Production-Grade AI Operating System
+
+An extensible AI platform featuring agent orchestration, persistent memory, Retrieval-Augmented Generation (RAG), tool execution, semantic search, and streaming conversations.
 
 Build, orchestrate, and manage intelligent AI agents with persistent memory, Retrieval-Augmented Generation (RAG), tool execution, streaming conversations, and enterprise-grade architecture.
 
@@ -42,6 +44,15 @@ It combines:
 The project follows scalable software engineering principles inspired by modern AI systems used in production.
 
 ---
+## Live Demo
+
+Frontend:
+https://agent-os-web-puce.vercel.app
+
+Backend API:
+https://agentos-api-sx1h.onrender.com
+
+---
 
 # Why AgentOS?
 
@@ -63,6 +74,30 @@ AgentOS brings these capabilities together into one extensible platform.
 
 ---
 
+# System Architecture
+```
+                User
+                  │
+                  ▼
+             React Frontend
+                  │
+                  ▼
+          Express REST API
+                  │
+      ┌───────────┼────────────┐
+      ▼           ▼            ▼
+ Authentication Runtime   Conversations
+      │           │            │
+      ▼           ▼            ▼
+ Memory     Retrieval      Tool Runtime
+      │           │            │
+      └──────► PostgreSQL ◄────┘
+                 pgvector
+                  │
+                  ▼
+            Groq / Jina APIs
+            
+```
 # Key Features
 
 ## AI Runtime
@@ -369,6 +404,54 @@ cd apps/web
 
 npm run dev
 ```
+
+---
+
+## Deployment
+
+Frontend:
+Vercel
+
+Backend:
+Render
+
+Database:
+PostgreSQL
+
+Vector Database:
+pgvector
+
+Status:
+Production Ready
+
+---
+
+## Project Stats
+
+Languages:
+TypeScript
+
+Architecture:
+Monorepo
+
+Modules:
+20+
+
+REST APIs:
+50+
+
+Database Tables:
+20+
+
+Production Features:
+Authentication
+RAG
+Streaming
+Memory
+Tools
+Vector Search
+Planner
+Runtime
 
 ---
 
