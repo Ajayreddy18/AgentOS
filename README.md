@@ -6,8 +6,6 @@
 
 An extensible AI platform featuring agent orchestration, persistent memory, Retrieval-Augmented Generation (RAG), tool execution, semantic search, and streaming conversations.
 
-Build, orchestrate, and manage intelligent AI agents with persistent memory, Retrieval-Augmented Generation (RAG), tool execution, streaming conversations, and enterprise-grade architecture.
-
 ---
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
@@ -44,6 +42,11 @@ It combines:
 The project follows scalable software engineering principles inspired by modern AI systems used in production.
 
 ---
+
+## Demo Link:
+
+Coming Soon 
+
 ## Live Demo
 
 Frontend:
@@ -51,6 +54,9 @@ https://agent-os-web-puce.vercel.app
 
 Backend API:
 https://agentos-api-sx1h.onrender.com
+
+GitHub:
+https://github.com/Ajayreddy18/AgentOS
 
 ---
 
@@ -206,6 +212,13 @@ Provider architecture allows easy addition of:
 ---
 
 # Technology Stack
+
+Repository Structure:
+Monorepo
+
+apps/
+packages/
+docs/
 
 ## Backend
 
@@ -421,6 +434,12 @@ PostgreSQL
 Vector Database:
 pgvector
 
+LLM Provider:
+Groq
+
+Embedding Provider:
+Jina AI
+
 Status:
 Production Ready
 
@@ -444,14 +463,19 @@ Database Tables:
 20+
 
 Production Features:
-Authentication
-RAG
-Streaming
-Memory
-Tools
-Vector Search
-Planner
-Runtime
+
+• Authentication
+• Organizations
+• AI Runtime
+• Persistent Memory
+• Knowledge Base
+• RAG
+• pgvector Search
+• Streaming Responses (SSE)
+• Tool Calling
+• Planner
+• Runtime Loader
+• Multi-provider LLM Support
 
 ---
 
