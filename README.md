@@ -16,7 +16,6 @@ Build, orchestrate, and manage intelligent AI agents with persistent memory, Ret
 ![pgvector](https://img.shields.io/badge/pgvector-enabled-red)
 ![React](https://img.shields.io/badge/React-19-blue)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38BDF8)
-![Docker](https://img.shields.io/badge/Docker-ready-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 </div>
@@ -209,7 +208,6 @@ Provider architecture allows easy addition of:
 
 ## DevOps
 
-- Docker
 - GitHub
 - Husky
 - ESLint
