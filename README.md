@@ -60,6 +60,13 @@ https://github.com/Ajayreddy18/AgentOS
 
 ---
 
+# Screenshots
+
+## Login
+![Login] (assets/screenshots/loginpage.png)
+
+---
+
 # Why AgentOS?
 
 Modern AI applications require much more than calling an LLM API.
