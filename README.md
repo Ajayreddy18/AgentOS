@@ -62,10 +62,97 @@ https://github.com/Ajayreddy18/AgentOS
 
 # Screenshots
 
-## Login
-![Login] (assets/screenshots/loginpage.png)
+<table>
+<tr>
+<td align="center">
+<b>Login</b><br>
+<img src="assets/screenshots/loginpage.png" width="420">
+</td>
 
----
+<td align="center">
+<b>Dashboard</b><br>
+<img src="assets/screenshots/Dashboard.png" width="420">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Organizations</b><br>
+<img src="assets/screenshots/Organizations.png" width="420">
+</td>
+
+<tr>
+<td align="center">
+<b>Projects</b><br>
+<img src="assets/screenshots/Project.png" width="420">
+</td>
+
+<tr>
+<td align="center">
+<b>Environments</b><br>
+<img src="assets/screenshots/Environments.png" width="420">
+</td>
+
+
+<tr>
+<td align="center">
+<b>Agents</b><br>
+<img src="assets/screenshots/Agents.png" width="420">
+</td>
+
+<td align="center">
+<b>Conversations</b><br>
+<img src="assets/screenshots/Conversations.png" width="420">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Knowledge</b><br>
+<img src="assets/screenshots/Knowledges.png" width="420">
+</td>
+
+<td align="center">
+<b>Prompts</b><br>
+<img src="assets/screenshots/Prompts.png" width="420">
+</td>
+</tr>
+
+<td align="center">
+<b>Tools</b><br>
+<img src="assets/screenshots/Tools.png" width="420">
+</td>
+</tr>
+
+<td align="center">
+<b>Settings</b><br>
+<img src="assets/screenshots/Agent Settings.png" width="420">
+</td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+<b>Chat</b><br>
+<img src="assets/screenshots/Chat.png" width="850">
+</td>
+</tr>
+</table>
+
+<tr>
+<td colspan="2" align="center">
+<b>Metrics</b><br>
+<img src="assets/screenshots/Metrics.png" width="850">
+</td>
+</tr>
+</table>
+
+<tr>
+<td colspan="2" align="center">
+<b>Audit</b><br>
+<img src="assets/screenshots/Audit.png" width="850">
+</td>
+</tr>
+</table>
 
 # Why AgentOS?
 
