@@ -84,7 +84,7 @@ https://github.com/Ajayreddy18/AgentOS
 <tr>
 <td align="center">
 <b>Projects</b><br>
-<img src="assets/screenshots/Project.png" width="420">
+<img src="assets/screenshots/Projects.png" width="420">
 </td>
 
 <tr>
